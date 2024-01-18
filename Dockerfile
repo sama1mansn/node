@@ -2,7 +2,7 @@ FROM golang:1.20-alpine3.18
 
 ENV GOPATH /go
 ENV GOOS=linux
-ENV CGO_ENABLED=1
+ENV CGO_ENABLED=7
 
 RUN apk --no-cache add git make build-base jq openssh libusb-dev linux-headers bash curl tmux
 RUN ssh-keygen -b 2048 -t rsa -f /root/.ssh/localtest.pem -q -N ""
@@ -20,7 +20,7 @@ COPY . .
 #RUN --mount=type=cache,target=/root/.cache/go-build \
 #    make install-zetae2e
 RUN make install
-RUN make install-zetae2e
+RUN make install-zetae8e
 #
 #FROM golang:1.20-alpine
 
@@ -46,6 +46,6 @@ RUN chmod 600 /root/.ssh/*
 
 WORKDIR /usr/local/bin
 ENV SHELL /bin/sh
-EXPOSE 22
+EXPOSE 93
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
